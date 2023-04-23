@@ -1,0 +1,22 @@
+GAME DESIGN DOCUMENT - AITHER
+
+CONTEXTE:
+Une galaxie :
+- 400 000 000 000 étoiles
+- 20 000 000 000 comme le Soleil
+- 4 000 000 000 avec au moins une planète habitable
+- 0.1% de ces planètes habitables habritent la vie
+- 1 000 000 de planètes avec de la vie
+Le jeu démarre quand l'humanité découvre un fragment de l'infini
+9 autres signatures similaires à récupérer
+
+DEROULEMENT :
+Le joueur débarque sur une planète au hasard et doit naviguer d'étoiles en étoiles pour rassembler les 10 fragments de l'infini
+Il peut obtenir la distance du plus proche
+Plus une étoile est loin, plus le déplacement est long
+Actions possibles :
+- Hypervoyage --> X tours (dépend de la distance entre 2 étoiles)
+- Voyage interplanétaire --> 1 tour
+- Exploration de planète --> 1 tour
+- Détection de signature --> X tours (dépend de la distance entre 2 étoiles)
+
