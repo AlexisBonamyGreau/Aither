@@ -4,10 +4,10 @@ import java.io.File;
 
 public class Planet {
     // CLASS CONSTANTS
-    public static final int ROCK_WIDTH = 16;
-    public static final int ROCK_HEIGHT = 16;
-    public static final int GAS_WIDTH = 32;
-    public static final int GAS_HEIGHT = 32;
+    public static final int ROCK_WIDTH = 64;
+    public static final int ROCK_HEIGHT = 64;
+    public static final int GAS_WIDTH = 128;
+    public static final int GAS_HEIGHT = 128;
 
     // INSTANCE VARIABLES
     private int x;
