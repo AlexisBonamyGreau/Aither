@@ -15,7 +15,7 @@ public class MapGalaxy extends JPanel {
     // CLASS CONSTANTS
     public static final int WIDTH = 1080;
     public static final int HEIGHT = 720;
-    public static final int BG_SCALE = 2048;
+    public static final int BG_SCALE = 4096;
 
     // INSTANCE VARIABLES
     private Galaxy galaxy;
@@ -29,11 +29,11 @@ public class MapGalaxy extends JPanel {
     public MapGalaxy(int width, int height) throws IOException {
         this.x = 0;
         this.y = 0;
-        this.size = 1;
+        this.size = 4;
         this.state = 0;
 
         this.setPreferredSize(new Dimension(width, height));
-        this.setBackground(java.awt.Color.BLUE);
+        this.setBackground(java.awt.Color.BLACK);
 
         this.galaxy = new Galaxy();
 
@@ -50,18 +50,21 @@ public class MapGalaxy extends JPanel {
     // METHODS
     @Override
     public void paintComponent(java.awt.Graphics g) {
+        correctPosition();
+
         super.paintComponent(g);
-        int bgX = (this.x + WIDTH/2) / 3 - BG_SCALE*size/3;
-        int bgY = (this.y + HEIGHT/2) / 3 - BG_SCALE*size/3;
+        int bgX = (this.x + WIDTH/2) / 2 - BG_SCALE*size / 2;
+        int bgY = (this.y + HEIGHT/2) / 2 - BG_SCALE*size / 2;
         int width = BG_SCALE*size;
         int height = BG_SCALE*size;
+        g.drawImage(background, bgX+3000, bgY, width, height, null);
         g.drawImage(background, bgX, bgY, width, height, null);
         for (ViewStar star : galaxy.getViewStars()) {
             star.draw((java.awt.Graphics2D) g, x+WIDTH/2, y+HEIGHT/2, size, state);
         }
     }
 
-    public void update() {
+    public void updateState() {
         state = (state + 1) % 16;
     }
 
@@ -83,10 +86,18 @@ public class MapGalaxy extends JPanel {
         this.y += y;
     }
 
-    public void resize(double size) {
-        if (this.size * size < 1 || this.size * size > 64) {
+    public void resize(double size, int x, int y) {
+        if (this.size * size < 1 || this.size * size > 32) {
             return;
         }
-        this.size *= size;
+        this.size = (int) (this.size * size);
+        this.x = (int) ((x - (x - this.x)) * size);
+        this.y = (int) ((y - (y - this.y) + 10) * size);
+        repaint();
+    }
+
+    public void correctPosition() {
+        if (x < -2500*size) {  x = -2500*size; } else if (x > 2500*size) { x = 2500*size; }
+        if (y < -2500*size) { y = -2500*size; } else if (y > 2500*size) { y = 2500*size; }
     }
 }

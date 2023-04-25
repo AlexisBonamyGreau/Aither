@@ -48,7 +48,7 @@ public class AitherTool implements MouseInputListener, MouseWheelListener {
     // OTHER METHODS
     @Override
     public void mouseClicked(java.awt.event.MouseEvent e) {
-
+        System.out.println("x: " + e.getX() + " y: " + e.getY());
     }
 
     @Override

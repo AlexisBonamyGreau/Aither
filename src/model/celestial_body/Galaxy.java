@@ -19,8 +19,16 @@ public class Galaxy {
         stars = new Star[numStars];
         viewStars = new ViewStar[stars.length];
         for (int i = 0; i < stars.length; i++) {
-            stars[i] = new Star((int) (0 + gaussianDeviation * new Random().nextGaussian()),
-                    (int) (0 + gaussianDeviation * new Random().nextGaussian()));
+            // Generate random gaussian distribution for x and y between -2000 and 2000
+            int max = 2500;
+            int min = -2500;
+            int x = (int) (0 + gaussianDeviation * new Random().nextGaussian());
+            int y = (int) (0 + gaussianDeviation * new Random().nextGaussian());
+
+            if (x < min) {  x = min; } else if (x > max) { x = max; }
+            if (y < min) { y = min; } else if (y > max) { y = max; }
+
+            stars[i] = new Star(x, y);
             viewStars[i] = new ViewStar(stars[i]);
         }
     }
