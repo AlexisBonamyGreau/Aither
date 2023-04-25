@@ -8,7 +8,7 @@ import java.io.IOException;
 import javax.swing.JPanel;
 
 import controller.tools.AitherTool;
-import model.celestial_body.Star;
+import model.celestial_body.Galaxy;
 import view.celestial_body.ViewStar;
 
 public class MapGalaxy extends JPanel {
@@ -18,7 +18,7 @@ public class MapGalaxy extends JPanel {
     public static final int BG_SCALE = 2048;
 
     // INSTANCE VARIABLES
-    private ViewStar star;
+    private Galaxy galaxy;
     private Image background;
     private int state;
     private int x;
@@ -35,38 +35,26 @@ public class MapGalaxy extends JPanel {
         this.setPreferredSize(new Dimension(width, height));
         this.setBackground(java.awt.Color.BLUE);
 
-        Star star = new Star(0, 0);
-        this.star = new ViewStar(star);
+        this.galaxy = new Galaxy();
 
         this.background = javax.imageio.ImageIO.read(new File("assets/bg.jpg"));
     }
 
     // GETTERS
-    public ViewStar getViewStar() {
-        return star;
+    public Galaxy getGalaxy() {
+        return galaxy;
     }
 
     // SETTERS
-    public void setStar(ViewStar star) {
-        this.star = star;
-    }
-
-    public void setX(int x) {
-        this.x = x;
-        star.setX(x);
-    }
-
-    public void setY(int y) {
-        this.y = y;
-        star.setY(y);
-    }
 
     // METHODS
     @Override
     public void paintComponent(java.awt.Graphics g) {
         super.paintComponent(g);
         g.drawImage(background, x-BG_SCALE*size/2+WIDTH/2, y-BG_SCALE*size/2+HEIGHT/2, BG_SCALE*size, BG_SCALE*size, null);
-        star.draw((java.awt.Graphics2D) g, x+WIDTH/2, y+HEIGHT/2, size, state);
+        for (ViewStar star : galaxy.getViewStars()) {
+            star.draw((java.awt.Graphics2D) g, x+WIDTH/2, y+HEIGHT/2, size, state);
+        }
     }
 
     public void update() {

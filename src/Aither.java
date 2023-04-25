@@ -8,18 +8,22 @@ import controller.tools.AitherTool;
 import view.gui.MapGalaxy;
 
 public class Aither {
+    // CLASS CONSTANTS
+    public static final int WIDTH = 1080;
+    public static final int HEIGHT = 720;
+
     public void Build(String title) throws IOException {
 
         JFrame frame = new JFrame(title);
 
-        MapGalaxy mapGalaxy = new MapGalaxy(1080, 720);
+        MapGalaxy mapGalaxy = new MapGalaxy(WIDTH, HEIGHT);
         AitherTool aitherTool = new AitherTool();
         mapGalaxy.associateTool(aitherTool);
         frame.add(mapGalaxy);
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setIconImage(new ImageIcon("assets\\ship\\ship.png").getImage() );
-        frame.setSize(1080, 720);
+        frame.setSize(WIDTH, HEIGHT);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }

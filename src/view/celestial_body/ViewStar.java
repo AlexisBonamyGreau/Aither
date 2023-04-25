@@ -24,7 +24,7 @@ public class ViewStar {
     }
 
     public void draw(java.awt.Graphics2D g2d, int x, int y, int size, int state) {
-        g2d.drawImage(sprites[state], x - star.getX(), y - star.getY(), 16*size, 16*size, null);
+        g2d.drawImage(sprites[state], x - star.getX() * size, y - star.getY() * size, 16*size, 16*size, null);
     }
 
     public void setX(int x) {
