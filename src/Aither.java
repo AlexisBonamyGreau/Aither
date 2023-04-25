@@ -4,6 +4,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
+import controller.tools.AitherTool;
 import view.gui.MapGalaxy;
 
 public class Aither {
@@ -12,6 +13,8 @@ public class Aither {
         JFrame frame = new JFrame(title);
 
         MapGalaxy mapGalaxy = new MapGalaxy(1080, 720);
+        AitherTool aitherTool = new AitherTool();
+        mapGalaxy.associateTool(aitherTool);
         frame.add(mapGalaxy);
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

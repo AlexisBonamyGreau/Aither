@@ -25,7 +25,7 @@ public class ViewPlanet {
         }
     }
 
-    public void draw(Graphics2D g2d) {
-        g2d.drawImage(sprites[0], planet.getX(), planet.getY(), 128, 128, null);
+    public void draw(Graphics2D g2d, int state) {
+        g2d.drawImage(sprites[state], planet.getX(), planet.getY(), 128, 128, null);
     }
 }
