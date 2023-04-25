@@ -26,6 +26,7 @@ public class Aither {
         frame.setSize(WIDTH, HEIGHT);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+        frame.setResizable(false);
     }
 
     public static void main(String[] args) {

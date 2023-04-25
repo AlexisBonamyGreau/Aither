@@ -51,7 +51,11 @@ public class MapGalaxy extends JPanel {
     @Override
     public void paintComponent(java.awt.Graphics g) {
         super.paintComponent(g);
-        g.drawImage(background, x-BG_SCALE*size/2+WIDTH/2, y-BG_SCALE*size/2+HEIGHT/2, BG_SCALE*size, BG_SCALE*size, null);
+        int bgX = (this.x + WIDTH/2) / 3 - BG_SCALE*size/3;
+        int bgY = (this.y + HEIGHT/2) / 3 - BG_SCALE*size/3;
+        int width = BG_SCALE*size;
+        int height = BG_SCALE*size;
+        g.drawImage(background, bgX, bgY, width, height, null);
         for (ViewStar star : galaxy.getViewStars()) {
             star.draw((java.awt.Graphics2D) g, x+WIDTH/2, y+HEIGHT/2, size, state);
         }
