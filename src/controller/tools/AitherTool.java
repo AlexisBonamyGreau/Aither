@@ -89,11 +89,12 @@ public class AitherTool implements MouseInputListener, MouseWheelListener {
 
     @Override
     public void mouseWheelMoved(MouseWheelEvent e) {
+        int x = e.getX() - map.getWidth()/2;
+        int y = e.getY() - map.getHeight()/2;
         if (e.getWheelRotation() < 0) {
-            map.resize(2);
+            map.resize(2, x, y);
         } else {
-            map.resize(0.5);
+            map.resize(0.5, x, y);
         }
-        map.repaint();
     }
 }
