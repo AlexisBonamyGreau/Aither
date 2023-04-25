@@ -66,6 +66,8 @@ public class MapGalaxy extends JPanel {
 
     public void updateState() {
         state = (state + 1) % 16;
+        System.out.println(state);
+        repaint();
     }
 
     public void associateTool(AitherTool tool) {

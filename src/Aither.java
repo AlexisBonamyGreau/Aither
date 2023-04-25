@@ -21,6 +21,23 @@ public class Aither {
         mapGalaxy.associateTool(aitherTool);
         frame.add(mapGalaxy);
 
+        // start a second thread to update the state of the map
+        Thread thread = new Thread() {
+            public void run() {
+                while (true) {
+                    mapGalaxy.updateState();
+                    try {
+                        Thread.sleep(250);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        };
+        thread.start();
+
+        mapGalaxy.updateState();
+
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setIconImage(new ImageIcon("assets\\ship\\ship.png").getImage() );
         frame.setSize(WIDTH, HEIGHT);
