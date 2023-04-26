@@ -17,8 +17,8 @@ import view.celestial_body.ViewStar;
 
 public class MapGalaxy extends JPanel {
     // CLASS CONSTANTS
-    public static final int WIDTH = 1920;
-    public static final int HEIGHT = 1080;
+    public static final int WIDTH = 1280;
+    public static final int HEIGHT = 720;
     public static final int BG_SCALE = 4096;
 
     // INSTANCE VARIABLES

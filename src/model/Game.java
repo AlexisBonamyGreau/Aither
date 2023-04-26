@@ -11,8 +11,6 @@ import view.gui.MapGalaxy;
 
 public class Game {
     // INSTANCE VARIABLES
-    private final int WIDTH = 1920;
-    private final int HEIGHT = 1080;
     private Galaxy galaxy;
     private Ship ship;
     private enum State {
@@ -26,13 +24,13 @@ public class Game {
     private AitherTool aitherTool;
 
     // CONSTRUCTORS
-    public Game(JFrame frame) throws IOException {
+    public Game(JFrame frame, int width, int height) throws IOException {
         this.galaxy = new Galaxy();
         this.ship = new Ship();
         this.state = State.GALAXY;
         this.frame = frame;
 
-        this.mapGalaxy = new MapGalaxy(this, WIDTH, HEIGHT, galaxy);
+        this.mapGalaxy = new MapGalaxy(this, width, height, galaxy);
 
         this.aitherTool = new AitherTool();
     }
