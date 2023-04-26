@@ -4,39 +4,18 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
-import controller.tools.AitherTool;
-import view.gui.MapGalaxy;
+import model.Game;
 
 public class Aither {
-    // CLASS CONSTANTS
-    public static final int WIDTH = 1080;
-    public static final int HEIGHT = 720;
-
     public void Build(String title) throws IOException {
+        // CLASS CONSTANTS
+        final int WIDTH = 1280;
+        final int HEIGHT = 720;
 
         JFrame frame = new JFrame(title);
 
-        MapGalaxy mapGalaxy = new MapGalaxy(WIDTH, HEIGHT);
-        AitherTool aitherTool = new AitherTool();
-        mapGalaxy.associateTool(aitherTool);
-        frame.add(mapGalaxy);
-
-        // start a second thread to update the state of the map
-        Thread thread = new Thread() {
-            public void run() {
-                while (true) {
-                    mapGalaxy.updateState();
-                    try {
-                        Thread.sleep(250);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        };
-        thread.start();
-
-        mapGalaxy.updateState();
+        Game game = new Game();
+        game.update(frame);
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setIconImage(new ImageIcon("assets\\ship\\ship.png").getImage() );

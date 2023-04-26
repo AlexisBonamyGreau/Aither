@@ -27,7 +27,7 @@ public class MapGalaxy extends JPanel {
     private int size;
 
     // CONSTRUCTORS
-    public MapGalaxy(int width, int height) throws IOException {
+    public MapGalaxy(int width, int height, Galaxy galaxy) throws IOException {
         this.x = 0;
         this.y = 0;
         this.size = 4;
@@ -36,7 +36,7 @@ public class MapGalaxy extends JPanel {
         this.setPreferredSize(new Dimension(width, height));
         this.setBackground(java.awt.Color.BLACK);
 
-        this.galaxy = new Galaxy();
+        this.galaxy = galaxy;
 
         this.background = javax.imageio.ImageIO.read(new File("assets/bg.jpg"));
     }
