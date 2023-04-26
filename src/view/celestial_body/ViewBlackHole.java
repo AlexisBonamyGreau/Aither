@@ -24,6 +24,6 @@ public class ViewBlackHole {
     }
 
     public void draw(java.awt.Graphics2D g2d, int x, int y, int size, int state) {
-        g2d.drawImage(sprites[state], x - blackHole.getX() * size, y - blackHole.getY() * size, 64*size, 64*size, null);
+        g2d.drawImage(sprites[state], x - blackHole.getX() * size - 32*size, y - blackHole.getY() * size - 32*size, 64*size, 64*size, null);
     }
 }

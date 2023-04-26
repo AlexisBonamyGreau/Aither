@@ -1,6 +1,8 @@
 package view.gui;
 
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
@@ -15,8 +17,8 @@ import view.celestial_body.ViewStar;
 
 public class MapGalaxy extends JPanel {
     // CLASS CONSTANTS
-    public static final int WIDTH = 1080;
-    public static final int HEIGHT = 720;
+    public static final int WIDTH = 1920;
+    public static final int HEIGHT = 1080;
     public static final int BG_SCALE = 4096;
 
     // INSTANCE VARIABLES
@@ -69,6 +71,14 @@ public class MapGalaxy extends JPanel {
         }
         ViewBlackHole blackHole = galaxy.getViewBlackHole();
         blackHole.draw((java.awt.Graphics2D) g, x+WIDTH/2, y+HEIGHT/2, size, state);
+        g.setFont(new Font("", 20, 20));
+        g.setColor(Color.WHITE);
+        g.drawString("X: " + this.x + " Y: " + this.y, WIDTH/2-75, 40);
+
+        // draw a target on the center of the screen
+        g.setColor(Color.RED);
+        g.drawLine(WIDTH/2 - 10, HEIGHT/2, WIDTH/2 + 10, HEIGHT/2);
+        g.drawLine(WIDTH/2, HEIGHT/2 - 10, WIDTH/2, HEIGHT/2 + 10);
     }
 
     public void updateState() {
@@ -98,12 +108,9 @@ public class MapGalaxy extends JPanel {
         if (this.size * size < 1 || this.size * size > 32) {
             return;
         }
-        
-        // System.out.println("x: " + x + " y: " + y);
-        // System.out.println("this.x: " + this.x + " this.y: " + this.y);
-        
-        this.x = (int) (this.x * size - x * (size));
-        this.y = (int) (this.y * size - y * (size));
+
+        this.x = (int) (this.x * size - x * (size-1));
+        this.y = (int) (this.y * size - y * (size-1));
 
         this.size = (int) (this.size * size);
         repaint();

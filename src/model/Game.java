@@ -11,8 +11,8 @@ import view.gui.MapGalaxy;
 
 public class Game {
     // INSTANCE VARIABLES
-    private final int WIDTH = 1280;
-    private final int HEIGHT = 720;
+    private final int WIDTH = 1920;
+    private final int HEIGHT = 1080;
     private Galaxy galaxy;
     private Ship ship;
     private enum State {
