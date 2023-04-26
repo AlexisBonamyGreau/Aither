@@ -95,14 +95,23 @@ public class MapGalaxy extends JPanel {
             return;
         }
         
-        System.out.println("x: " + x + " y: " + y);
-        System.out.println("this.x: " + this.x + " this.y: " + this.y);
+        // System.out.println("x: " + x + " y: " + y);
+        // System.out.println("this.x: " + this.x + " this.y: " + this.y);
         
         this.x = (int) (this.x * size - x * (size));
         this.y = (int) (this.y * size - y * (size));
 
         this.size = (int) (this.size * size);
         repaint();
+    }
+
+    public void click(int x, int y) {
+        for (ViewStar star : galaxy.getViewStars()) {
+            if (star.isClicked(x, y, this.x+WIDTH/2, this.y+HEIGHT/2, size)) {
+                System.out.println("Star clicked");
+                System.out.println(star.getStar().toString());
+            }
+        }
     }
 
     public void correctPosition() {

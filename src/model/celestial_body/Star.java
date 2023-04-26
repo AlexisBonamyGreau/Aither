@@ -19,9 +19,16 @@ public class Star {
         this.y = y;
         File[] starFiles = new File("assets/stars/mini").listFiles();
         this.model = starFiles[(int) (Math.random() * starFiles.length)].getName();
-        this.planets = new Planet[(int) (Math.random() * 5)];
-        for (int i = 0; i < planets.length; i++) {
+
+        // generate rocky and gaseous planets
+        int rockyPlanets = (int) (Math.random() * 5);
+        int gaseousPlanets = (int) (Math.random() * 5);
+        this.planets = new Planet[rockyPlanets + gaseousPlanets];
+        for (int i = 0; i < rockyPlanets; i++) {
             planets[i] = new Planet(x, y, false);
+        }
+        for (int i = rockyPlanets; i < rockyPlanets + gaseousPlanets; i++) {
+            planets[i] = new Planet(x, y, true);
         }
     }
 
@@ -61,8 +68,8 @@ public class Star {
     public String toString() {
         String result = "";
         result += "Star at (" + x + ", " + y + ")\n";
-        for (Planet planet : planets) {
-            result += "\t" + planet.toString() + "\n";
+        for (int i = 0; i < planets.length; i++) {
+            result += " |  " + planets[i].toString() + "\n";
         }
         return result;
     }
