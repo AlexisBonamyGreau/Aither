@@ -14,8 +14,8 @@ public class Aither {
 
         JFrame frame = new JFrame(title);
 
-        Game game = new Game();
-        game.update(frame);
+        Game game = new Game(frame);
+        game.update();
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setIconImage(new ImageIcon("assets\\ship\\ship.png").getImage() );

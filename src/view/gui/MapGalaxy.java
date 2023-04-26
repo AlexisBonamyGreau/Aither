@@ -8,6 +8,7 @@ import java.io.IOException;
 import javax.swing.JPanel;
 
 import controller.tools.AitherTool;
+import model.Game;
 import model.celestial_body.Galaxy;
 import view.celestial_body.ViewBlackHole;
 import view.celestial_body.ViewStar;
@@ -19,6 +20,7 @@ public class MapGalaxy extends JPanel {
     public static final int BG_SCALE = 4096;
 
     // INSTANCE VARIABLES
+    private Game game;
     private Galaxy galaxy;
     private Image background;
     private int state;
@@ -27,7 +29,9 @@ public class MapGalaxy extends JPanel {
     private int size;
 
     // CONSTRUCTORS
-    public MapGalaxy(int width, int height, Galaxy galaxy) throws IOException {
+    public MapGalaxy(Game game, int width, int height, Galaxy galaxy) throws IOException {
+        this.game = game;
+        
         this.x = 0;
         this.y = 0;
         this.size = 4;
@@ -105,11 +109,13 @@ public class MapGalaxy extends JPanel {
         repaint();
     }
 
-    public void click(int x, int y) {
+    public void click(int x, int y) throws IOException {
         for (ViewStar star : galaxy.getViewStars()) {
             if (star.isClicked(x, y, this.x+WIDTH/2, this.y+HEIGHT/2, size)) {
                 System.out.println("Star clicked");
                 System.out.println(star.getStar().toString());
+                game.setStateStellarSystem();
+                game.update();
             }
         }
     }

@@ -19,12 +19,22 @@ public class Game {
         MENU, PAUSE, GALAXY, STELLAR_SYSTEM
     }
     private State state;
+    private JFrame frame;
+
+    private MapGalaxy mapGalaxy;
+
+    private AitherTool aitherTool;
 
     // CONSTRUCTORS
-    public Game() throws IOException {
+    public Game(JFrame frame) throws IOException {
         this.galaxy = new Galaxy();
         this.ship = new Ship();
         this.state = State.GALAXY;
+        this.frame = frame;
+
+        this.mapGalaxy = new MapGalaxy(this, WIDTH, HEIGHT, galaxy);
+
+        this.aitherTool = new AitherTool();
     }
 
     // GETTERS
@@ -40,11 +50,28 @@ public class Game {
         return state;
     }
 
+    // STATE METHODS
+    public void setStateGalaxy() {
+        state = State.GALAXY;
+    }
+
+    public void setStateStellarSystem() {
+        state = State.STELLAR_SYSTEM;
+    }
+
+    public void setStateMenu() {
+        state = State.MENU;
+    }
+
+    public void setStatePause() {
+        state = State.PAUSE;
+    }
+
     // METHODS
-    public void update(JFrame frame) throws IOException {
+    public void update() throws IOException {
         switch (state) {
             case GALAXY:
-                voidGalaxy(frame);
+                voidGalaxy(this.frame);
                 break;
             case STELLAR_SYSTEM:
                 System.out.println("STELLAR_SYSTEM");
@@ -58,12 +85,8 @@ public class Game {
     }
 
     public void voidGalaxy(JFrame frame) throws IOException {
-        MapGalaxy mapGalaxy = new MapGalaxy(WIDTH, HEIGHT, galaxy);
-        AitherTool aitherTool = new AitherTool();
         mapGalaxy.associateTool(aitherTool);
         frame.add(mapGalaxy);
-
-        // start a second thread to update the state of the map
         Thread thread = new Thread() {
             public void run() {
                 while (true) {
@@ -77,7 +100,6 @@ public class Game {
             }
         };
         thread.start();
-
         mapGalaxy.updateState();
     }
 }
