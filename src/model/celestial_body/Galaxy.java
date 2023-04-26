@@ -3,6 +3,7 @@ package model.celestial_body;
 import java.io.IOException;
 import java.util.Random;
 
+import view.celestial_body.ViewBlackHole;
 import view.celestial_body.ViewStar;
 
 public class Galaxy {
@@ -13,6 +14,8 @@ public class Galaxy {
     // INSTANCE VARIABLES
     private Star[] stars;
     private ViewStar[] viewStars;
+    private BlackHole blackHole;
+    private ViewBlackHole viewBlackHole;
 
     // CONSTRUCTORS
     public Galaxy() throws IOException {
@@ -31,6 +34,9 @@ public class Galaxy {
             stars[i] = new Star(x, y);
             viewStars[i] = new ViewStar(stars[i]);
         }
+
+        blackHole = new BlackHole();
+        viewBlackHole = new ViewBlackHole(blackHole);
     }
 
     // GETTERS
@@ -40,5 +46,9 @@ public class Galaxy {
 
     public ViewStar[] getViewStars() {
         return viewStars;
+    }
+
+    public ViewBlackHole getViewBlackHole() {
+        return viewBlackHole;
     }
 }

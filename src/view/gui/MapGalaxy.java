@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 
 import controller.tools.AitherTool;
 import model.celestial_body.Galaxy;
+import view.celestial_body.ViewBlackHole;
 import view.celestial_body.ViewStar;
 
 public class MapGalaxy extends JPanel {
@@ -62,11 +63,12 @@ public class MapGalaxy extends JPanel {
         for (ViewStar star : galaxy.getViewStars()) {
             star.draw((java.awt.Graphics2D) g, x+WIDTH/2, y+HEIGHT/2, size, state);
         }
+        ViewBlackHole blackHole = galaxy.getViewBlackHole();
+        blackHole.draw((java.awt.Graphics2D) g, x+WIDTH/2, y+HEIGHT/2, size, state);
     }
 
     public void updateState() {
         state = (state + 1) % 16;
-        System.out.println(state);
         repaint();
     }
 
@@ -92,9 +94,14 @@ public class MapGalaxy extends JPanel {
         if (this.size * size < 1 || this.size * size > 32) {
             return;
         }
+        
+        System.out.println("x: " + x + " y: " + y);
+        System.out.println("this.x: " + this.x + " this.y: " + this.y);
+        
+        this.x = (int) (this.x * size - x * (size));
+        this.y = (int) (this.y * size - y * (size));
+
         this.size = (int) (this.size * size);
-        this.x = (int) ((x - (x - this.x)) * size);
-        this.y = (int) ((y - (y - this.y) + 10) * size);
         repaint();
     }
 
