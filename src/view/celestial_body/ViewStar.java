@@ -23,7 +23,25 @@ public class ViewStar {
         }
     }
 
-    public void draw(java.awt.Graphics2D g2d) {
-        g2d.drawImage(sprites[0], star.getX(), star.getY(), 128, 128, null);
+    // GETTERS
+    public Star getStar() {
+        return star;
+    }
+
+    // METHODS
+    public void draw(java.awt.Graphics2D g2d, int x, int y, int size, int state) {
+        g2d.drawImage(sprites[state], x - star.getX() * size, y - star.getY() * size, 16*size, 16*size, null);
+    }
+
+    public void setX(int x) {
+        star.setX(x);
+    }
+
+    public void setY(int y) {
+        star.setY(y);
+    }
+
+    public boolean isClicked(int x, int y, int i, int j, int size) {
+        return (x >= i - star.getX() * size && x <= i - star.getX() * size + 16*size && y >= j - star.getY() * size && y <= j - star.getY() * size + 16*size);
     }
 }

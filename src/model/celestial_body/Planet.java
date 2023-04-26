@@ -87,13 +87,9 @@ public class Planet {
 
     // METHODS
     public String toString() {
-        return "Planet{" +
-                "x=" + x +
-                ", y=" + y +
-                ", width=" + width +
-                ", height=" + height +
-                ", model='" + model + '\'' +
-                ", isGasGiant=" + isGasGiant +
-                '}';
+        String string = "";
+        string += isGasGiant ? "Gas Giant" : "Rocky Planet ";
+        string += " at (" + x + ", " + y + ")";
+        return string;
     }
 }

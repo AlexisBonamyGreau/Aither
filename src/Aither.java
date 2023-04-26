@@ -4,19 +4,22 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
-import view.gui.MapGalaxy;
+import model.Game;
 
 public class Aither {
     public void Build(String title) throws IOException {
+        // CLASS CONSTANTS
+        final int WIDTH = 1280;
+        final int HEIGHT = 720;
 
         JFrame frame = new JFrame(title);
 
-        MapGalaxy mapGalaxy = new MapGalaxy(1080, 720);
-        frame.add(mapGalaxy);
+        Game game = new Game(frame);
+        game.update();
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setIconImage(new ImageIcon("assets\\ship\\ship.png").getImage() );
-        frame.setSize(1080, 720);
+        frame.setSize(WIDTH, HEIGHT);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
