@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.swing.JFrame;
 
 import controller.tools.ToolMapGalaxy;
+import controller.tools.ToolMapStellarSystem;
 import model.celestial_body.Galaxy;
 import model.entities.Ship;
 import view.celestial_body.ViewStar;
@@ -21,8 +22,13 @@ public class Game {
     private State state;
     private JFrame frame;
     private MapGalaxy mapGalaxy;
-    private ToolMapGalaxy aitherTool;
+    private MapStellarSystem mapStellarSystem;
     private ViewStar currentStar;
+
+    private Thread thread;
+
+    private ToolMapGalaxy toolMapGalaxy;
+    private ToolMapStellarSystem toolMapStellarSystem;
 
     // CONSTRUCTORS
     public Game(JFrame frame, int width, int height) throws IOException {
@@ -33,7 +39,8 @@ public class Game {
 
         this.mapGalaxy = new MapGalaxy(this, width, height, galaxy);
 
-        this.aitherTool = new ToolMapGalaxy();
+        this.toolMapGalaxy = new ToolMapGalaxy();
+        this.toolMapStellarSystem = new ToolMapStellarSystem();
     }
 
     // GETTERS
@@ -95,9 +102,7 @@ public class Game {
     }
 
     public void voidGalaxy(JFrame frame) throws IOException {
-        mapGalaxy.associateTool(aitherTool);
-        frame.add(mapGalaxy);
-        Thread thread = new Thread() {
+        mapGalaxy.associateTool(toolMapGalaxy);Thread thread = new Thread() {
             public void run() {
                 while (true) {
                     mapGalaxy.updateState();
@@ -110,14 +115,28 @@ public class Game {
             }
         };
         thread.start();
+        frame.add(mapGalaxy);
         frame.setVisible(true);
     }
 
     public void voidStellarSystem(JFrame frame) {
-        System.out.println("voidStellarSystem");
-        MapStellarSystem mapStellarSystem = new MapStellarSystem(this, currentStar);
+        System.out.println(currentStar.getStar().toString());
+        mapStellarSystem = new MapStellarSystem(this, currentStar);
+        mapStellarSystem.associateTool(toolMapStellarSystem);
+        thread = new Thread() {
+            public void run() {
+                while (true) {
+                    mapStellarSystem.updateState();
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        };
+        thread.start();
         frame.add(mapStellarSystem);
-        // mapStellarSystem.updateState();
         frame.setVisible(true);
     }
 }
