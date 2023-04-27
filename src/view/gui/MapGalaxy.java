@@ -9,7 +9,7 @@ import java.io.IOException;
 
 import javax.swing.JPanel;
 
-import controller.tools.AitherTool;
+import controller.tools.ToolMapGalaxy;
 import model.Game;
 import model.celestial_body.Galaxy;
 import view.celestial_body.ViewBlackHole;
@@ -67,13 +67,12 @@ public class MapGalaxy extends JPanel {
         g.drawImage(background, bgX+3000, bgY, width, height, null);
         g.drawImage(background, bgX, bgY, width, height, null);
         for (ViewStar star : galaxy.getViewStars()) {
-            star.draw((java.awt.Graphics2D) g, x+WIDTH/2, y+HEIGHT/2, size, state);
+            star.drawGalaxy((java.awt.Graphics2D) g, x+WIDTH/2, y+HEIGHT/2, size, state);
         }
         ViewBlackHole blackHole = galaxy.getViewBlackHole();
         blackHole.draw((java.awt.Graphics2D) g, x+WIDTH/2, y+HEIGHT/2, size, state);
-        g.setFont(new Font("", 20, 20));
-        g.setColor(Color.WHITE);
-        g.drawString("X: " + this.x + " Y: " + this.y, WIDTH/2-75, 40);
+        g.setFont(new Font("Arial", java.awt.Font.BOLD, 20));
+        g.drawString("X: " + this.x/size + " Y: " + this.y/size, WIDTH/2-75, 40);
 
         // draw a target on the center of the screen
         g.setColor(Color.RED);
@@ -86,14 +85,14 @@ public class MapGalaxy extends JPanel {
         repaint();
     }
 
-    public void associateTool(AitherTool tool) {
+    public void associateTool(ToolMapGalaxy tool) {
         tool.setMapGalaxy(this);
         this.addMouseListener(tool);
         this.addMouseMotionListener(tool);
         this.addMouseWheelListener(tool);
     }
 
-    public void dissociateTool(AitherTool tool) {
+    public void dissociateTool(ToolMapGalaxy tool) {
         this.removeMouseListener(tool);
         this.removeMouseMotionListener(tool);
         this.removeMouseWheelListener(tool);
@@ -119,9 +118,8 @@ public class MapGalaxy extends JPanel {
     public void click(int x, int y) throws IOException {
         for (ViewStar star : galaxy.getViewStars()) {
             if (star.isClicked(x, y, this.x+WIDTH/2, this.y+HEIGHT/2, size)) {
-                System.out.println("Star clicked");
-                System.out.println(star.getStar().toString());
                 game.setStateStellarSystem();
+                game.setCurrentStar(star);
                 game.update();
             }
         }

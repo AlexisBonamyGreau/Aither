@@ -8,7 +8,7 @@ import javax.swing.event.MouseInputListener;
 
 import view.gui.MapGalaxy;
 
-public class AitherTool implements MouseInputListener, MouseWheelListener {
+public class ToolMapGalaxy implements MouseInputListener, MouseWheelListener {
     // INSTANCE VARIABLES
     private int x1;
     private int y1;

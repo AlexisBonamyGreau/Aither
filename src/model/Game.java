@@ -4,10 +4,12 @@ import java.io.IOException;
 
 import javax.swing.JFrame;
 
-import controller.tools.AitherTool;
+import controller.tools.ToolMapGalaxy;
 import model.celestial_body.Galaxy;
 import model.entities.Ship;
+import view.celestial_body.ViewStar;
 import view.gui.MapGalaxy;
+import view.gui.MapStellarSystem;
 
 public class Game {
     // INSTANCE VARIABLES
@@ -18,10 +20,9 @@ public class Game {
     }
     private State state;
     private JFrame frame;
-
     private MapGalaxy mapGalaxy;
-
-    private AitherTool aitherTool;
+    private ToolMapGalaxy aitherTool;
+    private ViewStar currentStar;
 
     // CONSTRUCTORS
     public Game(JFrame frame, int width, int height) throws IOException {
@@ -32,7 +33,7 @@ public class Game {
 
         this.mapGalaxy = new MapGalaxy(this, width, height, galaxy);
 
-        this.aitherTool = new AitherTool();
+        this.aitherTool = new ToolMapGalaxy();
     }
 
     // GETTERS
@@ -46,6 +47,11 @@ public class Game {
 
     public State getState() {
         return state;
+    }
+
+    // SETTERS
+    public void setCurrentStar(ViewStar star) {
+        this.currentStar = star;
     }
 
     // STATE METHODS
@@ -69,17 +75,23 @@ public class Game {
     public void update() throws IOException {
         switch (state) {
             case GALAXY:
+                clearFrame();
                 voidGalaxy(this.frame);
                 break;
             case STELLAR_SYSTEM:
-                System.out.println("STELLAR_SYSTEM");
-                state = State.GALAXY;
+                clearFrame();
+                voidStellarSystem(this.frame);
                 break;
             case MENU:
                 break;
             case PAUSE:
                 break;
         }
+    }
+
+    public void clearFrame() {
+        frame.getContentPane().removeAll();
+        frame.repaint();
     }
 
     public void voidGalaxy(JFrame frame) throws IOException {
@@ -98,6 +110,14 @@ public class Game {
             }
         };
         thread.start();
-        mapGalaxy.updateState();
+        frame.setVisible(true);
+    }
+
+    public void voidStellarSystem(JFrame frame) {
+        System.out.println("voidStellarSystem");
+        MapStellarSystem mapStellarSystem = new MapStellarSystem(this, currentStar);
+        frame.add(mapStellarSystem);
+        // mapStellarSystem.updateState();
+        frame.setVisible(true);
     }
 }

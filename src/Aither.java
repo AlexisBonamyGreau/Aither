@@ -21,7 +21,6 @@ public class Aither {
         frame.setIconImage(new ImageIcon("assets\\ship\\ship.png").getImage() );
         frame.setSize(WIDTH, HEIGHT);
         frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
         frame.setResizable(false);
     }
 

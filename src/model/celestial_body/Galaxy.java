@@ -54,4 +54,13 @@ public class Galaxy {
     public ViewBlackHole getViewBlackHole() {
         return viewBlackHole;
     }
+
+    // METHODS
+    public void findStar(int x, int y) {
+        for (Star star : stars) {
+            if (star.getX() == x && star.getY() == y) {
+                System.out.println("Star found!");
+            }
+        }
+    }
 }
