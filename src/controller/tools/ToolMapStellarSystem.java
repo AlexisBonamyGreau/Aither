@@ -3,6 +3,7 @@ package controller.tools;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
+import java.io.IOException;
 
 import javax.swing.event.MouseInputListener;
 
@@ -24,6 +25,11 @@ public class ToolMapStellarSystem implements MouseInputListener, MouseWheelListe
     // OTHER METHODS
     @Override
     public void mouseClicked(MouseEvent e) {
+        try {
+            map.click(e.getX(), e.getY());
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
     }
 
     @Override

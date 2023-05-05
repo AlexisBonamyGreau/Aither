@@ -1,11 +1,13 @@
 package view.gui;
 
 import java.awt.Image;
+import java.io.IOException;
 
 import javax.swing.JPanel;
 
 import controller.tools.ToolMapStellarSystem;
 import model.Game;
+import view.celestial_body.ViewPlanet;
 import view.celestial_body.ViewStar;
 
 public class MapStellarSystem extends JPanel {
@@ -54,10 +56,11 @@ public class MapStellarSystem extends JPanel {
 
         g.drawImage(background, 0, 0, 3000*4, 3000*4, this);
 
-        g.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 20));
-        g.drawString("Stellar System", 10, 30);
-
         star.drawSystem((java.awt.Graphics2D) g, x, state);
+
+        // for (int i = 0; i < star.getPlanets().length; i++) {
+        //     star.getPlanets()[i].drawSystem((java.awt.Graphics2D) g, x, state);
+        // }
     }
 
     public void updateState() {
@@ -70,5 +73,10 @@ public class MapStellarSystem extends JPanel {
         this.addMouseListener(tool);
         this.addMouseMotionListener(tool);
         this.addMouseWheelListener(tool);
+    }
+
+    public void click(int x, int y) throws IOException {
+        game.setStateGalaxy();
+        game.update();
     }
 }

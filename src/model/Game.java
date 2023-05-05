@@ -25,8 +25,6 @@ public class Game {
     private MapStellarSystem mapStellarSystem;
     private ViewStar currentStar;
 
-    private Thread thread;
-
     private ToolMapGalaxy toolMapGalaxy;
     private ToolMapStellarSystem toolMapStellarSystem;
 
@@ -37,10 +35,28 @@ public class Game {
         this.state = State.GALAXY;
         this.frame = frame;
 
+        this.currentStar = new ViewStar(galaxy.getStars()[0]);
+
         this.mapGalaxy = new MapGalaxy(this, width, height, galaxy);
+        this.mapStellarSystem = new MapStellarSystem(this, currentStar);
 
         this.toolMapGalaxy = new ToolMapGalaxy();
         this.toolMapStellarSystem = new ToolMapStellarSystem();
+
+        // Thread thread = new Thread() {
+        //     public void run() {
+        //         while (true) {
+        //             mapGalaxy.updateState();
+        //             mapStellarSystem.updateState();
+        //             try {
+        //                 Thread.sleep(500);
+        //             } catch (InterruptedException e) {
+        //                 e.printStackTrace();
+        //             }
+        //         }
+        //     }
+        // };
+        // thread.start();
     }
 
     // GETTERS
@@ -102,19 +118,7 @@ public class Game {
     }
 
     public void voidGalaxy(JFrame frame) throws IOException {
-        mapGalaxy.associateTool(toolMapGalaxy);Thread thread = new Thread() {
-            public void run() {
-                while (true) {
-                    mapGalaxy.updateState();
-                    try {
-                        Thread.sleep(250);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        };
-        thread.start();
+        mapGalaxy.associateTool(toolMapGalaxy);
         frame.add(mapGalaxy);
         frame.setVisible(true);
     }
@@ -123,19 +127,6 @@ public class Game {
         System.out.println(currentStar.getStar().toString());
         mapStellarSystem = new MapStellarSystem(this, currentStar);
         mapStellarSystem.associateTool(toolMapStellarSystem);
-        thread = new Thread() {
-            public void run() {
-                while (true) {
-                    mapStellarSystem.updateState();
-                    try {
-                        Thread.sleep(500);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        };
-        thread.start();
         frame.add(mapStellarSystem);
         frame.setVisible(true);
     }

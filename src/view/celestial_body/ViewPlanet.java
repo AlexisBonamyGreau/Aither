@@ -17,7 +17,6 @@ public class ViewPlanet {
     // CONSTRUCTORS
     public ViewPlanet(Planet planet) throws IOException {
         this.planet = planet;
-        System.out.println("assets/planets/" + (planet.isGasGiant() ? "gas/" : "rock/") + planet.getModel());
         BufferedImage spriteSheet = ImageIO.read(new File("assets/planets/" + (planet.isGasGiant() ? "gas/" : "rock/") + planet.getModel()));
         this.sprites = new BufferedImage[16];
         for (int i = 0; i < 16; i++) {
@@ -25,7 +24,9 @@ public class ViewPlanet {
         }
     }
 
-    public void draw(Graphics2D g2d, int state) {
-        g2d.drawImage(sprites[state], planet.getX(), planet.getY(), 128, 128, null);
+    public void drawSystem(Graphics2D g2d, int x, int state) {
+        System.out.println("Drawing planet at " + x + " with state " + state);
+        System.out.println(sprites.length);
+        g2d.drawImage(sprites[state], x - 1000, -128/2 + 720/2, 128, 128, null);
     }
 }

@@ -1,6 +1,5 @@
 package view.celestial_body;
 
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -17,6 +16,7 @@ public class ViewStar {
     protected final Star star;
     protected final BufferedImage[] spritesMini;
     protected final BufferedImage[] spritesNormal;
+    private ViewPlanet[] planets;
 
     // CONSTRUCTORS
     public ViewStar(Star star) throws IOException {
@@ -31,12 +31,19 @@ public class ViewStar {
         for (int i = 0; i < 4; i++) {
             this.spritesNormal[i] = spriteSheet.getSubimage(i * 1024, 0, 1024, 1024);
         }
-        // this.image = ImageIO.read(new File("assets/stars/normal/" + star.getModel()));
+        // this.planets = new ViewPlanet[star.getPlanets().length];
+        // for (int i = 0; i < star.getPlanets().length; i++) {
+        //     this.planets[i] = new ViewPlanet(star.getPlanets()[i]);
+        // }
     }
 
     // GETTERS
     public Star getStar() {
         return star;
+    }
+
+    public ViewPlanet[] getPlanets() {
+        return planets;
     }
 
     // METHODS
